@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+
+    <title>Daily Tasks App!</title>
+
+    <link rel="stylesheet" href="css/main.css">
+
+  </head>
+
+  <body ng-app="tasksApp">
+
+    <div id="container" ng-controller="TasksController as tasks">
+
+      <div class="left-container">
+        <h1>Uncomplete Tasks</h1>
+        <div class="dashed" ng-repeat="k in tasks.tasksList | filter: false">
+          <h2>Chore: {{k.taskName}}</h2>
+          <p>Type: {{k.taskCategory}}</p>
+          <p>Time: {{k.taskTime}}.</p>
+          <img ng-src={{k.image}}>
+          <p>Done?<input type="checkbox" ng-model="k.completed"></p>
+          <button ng-click="tasks.deleteTask(k)">Delete {{k.taskName}}</button>
+        </div>
+      </div>
+
+      <div class="right-container">
+        <h1>Outta the Way</h1>
+        <div class="dashed" ng-repeat="k in tasks.tasksList | filter: true">
+          <h2>Chore: {{k.taskName}}</h2>
+          <p>Type: {{k.taskCategory}}</p>
+          <p>Time: {{k.taskTime}}.</p>
+          <img ng-src={{k.image}}>
+          <p>Back to Work?<input type="checkbox" ng-model="k.completed"></p>
+        </div>
+      </div>
+
+    </div>
+<!--
+    <div id ="container" class="centered">
+
+      <div class="addMore">
+
+        <h2>Add More</h2>
+
+      </div>
+
+    </div> -->
+
+
+        <!--Sourcing Angular-->
+    <script type="text/javascript" charset="utf-8" src="js/angular.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+
+
+    <script src="app.js"></script>
+
+    <script type="text/javascript" src="js/main.js"></script>
+    <!-- Source in controller -->
+    <script type="text/javascript" src="controllers/tasks_controller.js"></script>
+
+  </body>
+</html>
