@@ -27,6 +27,8 @@ body {
 }
 
 .left-container, .right-container {
+  font-family: 'Pacifico', cursive;
+
   border: 2px solid lightblue;
   background-color: white;
   float: left;
@@ -38,6 +40,8 @@ body {
 }
 
 h1 {
+    font-family: 'Pacifico', cursive;
+
    -webkit-text-stroke: .03px black;
    color: white;
    text-shadow:
