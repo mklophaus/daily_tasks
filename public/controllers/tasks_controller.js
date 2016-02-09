@@ -1,34 +1,43 @@
-// IIFE
 (function(){
-  ' ';
+  'use strict';
 
   angular
     .module("tasksApp")
     .controller("TasksController", TasksController);
 
-    TasksController.$inject = []; // makes it minification safe
+    TasksController.$inject = ["$http"];
 
-    function TasksController(){
+    function TasksController($http){
 
       var vm = this;
+      var tasksList = [];
 
-      vm.tasksList = [
-      {
-        taskName: 'Laundry',
-        taskCategory: 'Home Stuff',
-        taskTime: 'Easy',
-        image: 'images/laundry.jpg',
-        completed: true
-      },
-      {
-        taskName: 'Finish the SOP reports',
-        taskCategory: 'Work',
-        taskTime: 'Could be long...',
-        image: 'images/roughWork.jpg',
-        completed: false
-      }
+    //   vm.tasksList = [
+    //   {
+    //     taskName: 'Laundry',
+    //     taskCategory: 'Home Stuff',
+    //     taskTime: 'Easy',
+    //     image: 'images/laundry.jpg',
+    //     completed: true
+    //   },
+    //   {
+    //     taskName: 'Finish the SOP reports',
+    //     taskCategory: 'Work',
+    //     taskTime: 'Could be long...',
+    //     image: 'images/roughWork.jpg',
+    //     completed: false
+    //   }
 
-    ];
+    // ];
+
+    $http.get('/tasks').then(function(response){
+      angular.forEach(response.data, function(e){
+        console.log(e);
+        tasksList.push(e);
+      })
+      vm.tasksList = tasksList;
+    });
+
 
     this.deleteTask = deleteTask;
 
@@ -41,5 +50,8 @@
     }
 
   }; // end of controller
+
+
+
 
 })(); //Immediatley call our IFFE function
