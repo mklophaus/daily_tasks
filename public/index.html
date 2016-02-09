@@ -6,38 +6,73 @@
     <title>Daily Tasks App!</title>
 
     <link rel="stylesheet" href="css/main.css">
-
+   <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
   </head>
 
   <body ng-app="tasksApp">
 
-    <div id="container" ng-controller="TasksController as tasks">
+  <br/>
+
+  <div class="container" ng-controller="ModalController">
+
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Enter a Task!</h3>
+        </div>
+        <div class="modal-body">
+
+            <form name="myForm" ng-submit="submit(myForm)">
+              <div class="title-column">Name:</div><input type="text" ng-model="task.name" class="data-column"><br />
+              <div class="title-column">Category:</div><input type="text" ng-model="task.category" class="data-column"><br />
+              <div class="title-column">Time:</div><input type="text" ng-model="task.time" class="data-column"><br />
+              <div class="title-column">Image Url:</div><input type="text" ng-model="task.url" class="data-column"><br />
+              <br />
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="submit" ng-click="ok()">Enter</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+
+            </form>
+
+        </div>
+    </script>
+
+    <button type="button" class="btn btn-default" ng-click="open()">Add Task!</button>
+
+</div>
+
+    <div class="container" id="container" ng-controller="TasksController as tasks">
 
       <div class="left-container">
         <h1>Uncomplete Tasks</h1>
         <div class="dashed" ng-repeat="k in tasks.tasksList | filter: false">
-          <h2>Chore: {{k.taskName}}</h2>
-          <p>Type: {{k.taskCategory}}</p>
-          <p>Time: {{k.taskTime}}.</p>
-          <img ng-src={{k.image}}>
+          <h2>Chore: {{k.name}}</h2>
+          <p>Type: {{k.category}}</p>
+          <p>Time: {{k.time}}.</p>
+          <img ng-src={{k.url}}>
           <p>Done?<input type="checkbox" ng-model="k.completed"></p>
-          <button ng-click="tasks.deleteTask(k)">Delete {{k.taskName}}</button>
+          <button ng-click="tasks.deleteTask(k)">Delete {{k.name}}</button>
         </div>
       </div>
 
       <div class="right-container">
         <h1>Outta the Way</h1>
         <div class="dashed" ng-repeat="k in tasks.tasksList | filter: true">
-          <h2>Chore: {{k.taskName}}</h2>
-          <p>Type: {{k.taskCategory}}</p>
-          <p>Time: {{k.taskTime}}.</p>
-          <img ng-src={{k.image}}>
-          <p>Back to Work?<input type="checkbox" ng-model="k.completed"></p>
+          <h2>Chore: {{k.name}}</h2>
+          <p>Type: {{k.category}}</p>
+          <p>Time: {{k.time}}.</p>
+          <img ng-src={{k.url}}>
+          <p>Done?<input type="checkbox" ng-model="k.completed"></p>
         </div>
       </div>
 
     </div>
+
+
+
+
 <!--
     <div id ="container" class="centered">
 
@@ -53,11 +88,11 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
-    <script type="text/javascript" charset="utf-8" src="js/angular.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.js"></script>
     <script src="js/ui-bootstrap-tpls-1.1.2.min.js"></script>
+
 
 
 
@@ -66,6 +101,10 @@
     <script type="text/javascript" src="js/main.js"></script>
     <!-- Source in controller -->
     <script type="text/javascript" src="controllers/tasks_controller.js"></script>
+    <script type="text/javascript" src="controllers/modal_controller.js"></script>
+
+
+
 
   </body>
 </html>
